@@ -11,6 +11,7 @@ Group:		X11/Applications/Games
 Source0:	http://www.mamedev.org/downloader.php?file=mame0167/%{name}%{fver}.zip
 # Source0-md5:	cb2ab1cac87e6a5187d5c631d58ee3fa
 Patch0:		%{name}-system-jsoncpp.patch
+Patch1:		%{name}-c++11.patch
 URL:		http://www.mamedev.org/
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	SDL2-devel >= 2
@@ -68,13 +69,12 @@ udowodnić wierne odtworzenie sprzętu?).
 %setup -q -c
 %{__unzip} -q mame.zip
 %patch0 -p1
+%patch1 -p1
 
 %{__sed} -i -e 's/"lua"/"lua5.3"/' scripts/src/main.lua
 
 %build
-for target in mame mess ; do
 %{__make} \
-	TARGET=$target \
 %ifarch arm ppc ppc64 s390 s390x sparc sparcv9 sparc64
 	BIGENDIAN=1 \
 %endif
@@ -86,6 +86,7 @@ for target in mame mess ; do
 	LD="%{__cxx}" \
 	OPT_FLAGS="%{rpmcflags} $(pkg-config --cflags lua5.3)" \
 	LDFLAGS="%{rpmldflags}" \
+	CPP11=1 \
 	OSD=sdl \
 	USE_SYSTEM_LIB_EXPAT=1 \
 	USE_SYSTEM_LIB_FLAC=1 \
@@ -96,13 +97,16 @@ for target in mame mess ; do
 	USE_SYSTEM_LIB_SQLITE3=1 \
 	USE_SYSTEM_LIB_ZLIB=1 \
 	VERBOSE=1
-done
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_bindir}
 
-install mame mess $RPM_BUILD_ROOT%{_bindir}
+%ifarch %{x8664}
+install mame64 $RPM_BUILD_ROOT%{_bindir}/mame
+%else
+install mame $RPM_BUILD_ROOT%{_bindir}/mame
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -111,4 +115,3 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README.md docs/{SDL,config,floppy,hlsl,imgtool,m6502,mamelicense,newvideo,nscsi}.txt docs/luaengine.md
 %attr(755,root,root) %{_bindir}/mame
-%attr(755,root,root) %{_bindir}/mess
