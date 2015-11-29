@@ -42,6 +42,11 @@ Obsoletes:	xmame-xmess-svgalib
 Obsoletes:	xmame-xmess-x11
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%ifarch %{ix86} x32
+# linker memory exhausted on 32-bit x86
+%define		_enable_debug_packages	0
+%endif
+
 %description
 MAME stands for Multiple Arcade Machine Emulator.
 
@@ -81,6 +86,10 @@ udowodnić wierne odtworzenie sprzętu?).
 %ifarch %{x8664} alpha ia64 ppc64 s390x sparc64
 	PTR64=1 \
 %endif
+%ifarch x32
+	PTR64=0 \
+	ARCHITECTURE= \
+%endif
 	CC="%{__cc}" \
 	CXX="%{__cxx}" \
 	LD="%{__cxx}" \
@@ -102,7 +111,7 @@ udowodnić wierne odtworzenie sprzętu?).
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_bindir}
 
-%ifarch %{x8664}
+%ifarch %{x8664} ppc64
 install mame64 $RPM_BUILD_ROOT%{_bindir}/mame
 %else
 install mame $RPM_BUILD_ROOT%{_bindir}/mame
