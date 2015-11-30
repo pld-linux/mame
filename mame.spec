@@ -4,7 +4,7 @@ Summary:	MAME - Multiple Arcade Machine Emulator
 Summary(pl.UTF-8):	MAME (Multiple Arcade Machine Emulator) - emulator wielu automatów do gier
 Name:		mame
 Version:	0.167s
-Release:	0.1
+Release:	1
 License:	GPL v2+ (BSD for core part, LGPL v2.1+/GPL v2+ for some drivers)
 Group:		X11/Applications/Games
 #Source0Download: http://www.mamedev.org/release.html
