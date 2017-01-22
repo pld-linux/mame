@@ -3,15 +3,13 @@
 Summary:	MAME - Multiple Arcade Machine Emulator
 Summary(pl.UTF-8):	MAME (Multiple Arcade Machine Emulator) - emulator wielu automatów do gier
 Name:		mame
-Version:	0.167s
-Release:	2
+Version:	0.181
+Release:	1
 License:	GPL v2+ (BSD for core part, LGPL v2.1+/GPL v2+ for some drivers)
 Group:		X11/Applications/Games
 #Source0Download: http://www.mamedev.org/release.html
-Source0:	http://www.mamedev.org/downloader.php?file=mame0167/%{name}%{fver}.zip
-# Source0-md5:	cb2ab1cac87e6a5187d5c631d58ee3fa
-Patch0:		%{name}-system-jsoncpp.patch
-Patch1:		%{name}-c++11.patch
+Source0:	https://github.com/mamedev/mame/archive/mame%{fver}/%{name}-%{version}.tar.gz
+# Source0-md5:	5a6116932e512b3ddd2fea5906bd7c55
 URL:		http://www.mamedev.org/
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	SDL2-devel >= 2
@@ -71,10 +69,7 @@ głównie sprawdzeniu dokładności dokumentacji (bo jak inaczej można
 udowodnić wierne odtworzenie sprzętu?).
 
 %prep
-%setup -q -c
-%{__unzip} -q mame.zip
-%patch0 -p1
-%patch1 -p1
+%setup -q -n %{name}-%{name}%{fver}
 
 %{__sed} -i -e 's/"lua"/"lua5.3"/' scripts/src/main.lua
 
@@ -122,5 +117,5 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README.md docs/{SDL,config,floppy,hlsl,imgtool,m6502,mamelicense,newvideo,nscsi}.txt docs/luaengine.md
+%doc README.md
 %attr(755,root,root) %{_bindir}/mame
