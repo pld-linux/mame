@@ -40,10 +40,8 @@ Obsoletes:	xmame-xmess-svgalib
 Obsoletes:	xmame-xmess-x11
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%ifarch %{ix86} x32
-# linker memory exhausted on 32-bit x86
+# linker memory exhausted on x86_64 after reaching 23GB of virt mem
 %define		_enable_debug_packages	0
-%endif
 
 %description
 MAME stands for Multiple Arcade Machine Emulator.
