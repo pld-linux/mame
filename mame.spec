@@ -89,6 +89,7 @@ udowodnić wierne odtworzenie sprzętu?).
 	OPT_FLAGS="%{rpmcflags} $(pkg-config --cflags lua5.3)" \
 	LDFLAGS="%{rpmldflags}" \
 	CPP11=1 \
+	NOWERROR=1 \
 	OSD=sdl \
 	USE_SYSTEM_LIB_EXPAT=1 \
 	USE_SYSTEM_LIB_FLAC=1 \
