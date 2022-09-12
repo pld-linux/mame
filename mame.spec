@@ -3,13 +3,13 @@
 Summary:	MAME - Multiple Arcade Machine Emulator
 Summary(pl.UTF-8):	MAME (Multiple Arcade Machine Emulator) - emulator wielu automatów do gier
 Name:		mame
-Version:	0.181
+Version:	0.247
 Release:	1
 License:	GPL v2+ (BSD for core part, LGPL v2.1+/GPL v2+ for some drivers)
 Group:		X11/Applications/Games
 #Source0Download: http://www.mamedev.org/release.html
 Source0:	https://github.com/mamedev/mame/archive/mame%{fver}/%{name}-%{version}.tar.gz
-# Source0-md5:	5a6116932e512b3ddd2fea5906bd7c55
+# Source0-md5:	ecacc3c2e0cb63432fc22510dc7bedef
 URL:		http://www.mamedev.org/
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	SDL2-devel >= 2
@@ -106,11 +106,7 @@ udowodnić wierne odtworzenie sprzętu?).
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_bindir}
 
-%ifarch %{x8664} ppc64
-install mame64 $RPM_BUILD_ROOT%{_bindir}/mame
-%else
 install mame $RPM_BUILD_ROOT%{_bindir}/mame
-%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
