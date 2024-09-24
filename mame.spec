@@ -3,41 +3,51 @@
 Summary:	MAME - Multiple Arcade Machine Emulator
 Summary(pl.UTF-8):	MAME (Multiple Arcade Machine Emulator) - emulator wielu automatów do gier
 Name:		mame
-Version:	0.247
+Version:	0.249
 Release:	1
 License:	GPL v2+ (BSD for core part, LGPL v2.1+/GPL v2+ for some drivers)
 Group:		X11/Applications/Games
-#Source0Download: http://www.mamedev.org/release.html
+#Source0Download: https://www.mamedev.org/release.html
 Source0:	https://github.com/mamedev/mame/archive/mame%{fver}/%{name}-%{version}.tar.gz
-# Source0-md5:	ecacc3c2e0cb63432fc22510dc7bedef
-URL:		http://www.mamedev.org/
-BuildRequires:	OpenGL-GLU-devel
+# Source0-md5:	37b527a7b769b0d7d000ab512a5151ac
+URL:		https://www.mamedev.org/
+BuildRequires:	OpenGL-devel
+BuildRequires:	Qt5Core-devel >= 5
+BuildRequires:	Qt5Gui-devel >= 5
+BuildRequires:	Qt5Widgets-devel >= 5
 BuildRequires:	SDL2-devel >= 2
 BuildRequires:	SDL2_ttf-devel >= 2
+BuildRequires:	alsa-lib-devel
 BuildRequires:	expat-devel >= 1.95
 BuildRequires:	flac-devel
+BuildRequires:	fontconfig-devel
+BuildRequires:	freetype-devel >= 2
 BuildRequires:	libjpeg-devel
 BuildRequires:	lua53-devel >= 5.3
 BuildRequires:	pkgconfig
 BuildRequires:	portaudio-devel
 BuildRequires:	portmidi-devel
+BuildRequires:	pulseaudio-devel
 BuildRequires:	sed >= 4.0
 BuildRequires:	sqlite3-devel >= 3
 BuildRequires:	unzip
 BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libXext-devel
+BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXinerama-devel
 BuildRequires:	zlib-devel
 Suggests:	gmameui
-Obsoletes:	sdlhazemd
-Obsoletes:	sdlmame
-Obsoletes:	xmame
-Obsoletes:	xmame-SDL
-Obsoletes:	xmame-qtmame
-Obsoletes:	xmame-svgalib
-Obsoletes:	xmame-x11
-Obsoletes:	xmame-xmess-SDL
-Obsoletes:	xmame-xmess-svgalib
-Obsoletes:	xmame-xmess-x11
+Obsoletes:	sdlhazemd < 0.15
+Obsoletes:	sdlmame < 0.137
+Obsoletes:	xmame < 0.107
+Obsoletes:	xmame-SDL < 0.107
+Obsoletes:	xmame-common < 0.107
+Obsoletes:	xmame-qtmame < 0.107
+Obsoletes:	xmame-svgalib < 0.107
+Obsoletes:	xmame-x11 < 0.107
+Obsoletes:	xmame-xmess-SDL < 0.107
+Obsoletes:	xmame-xmess-svgalib < 0.107
+Obsoletes:	xmame-xmess-x11 < 0.107
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # linker memory exhausted on x86_64 after reaching 23GB of virt mem
@@ -73,7 +83,7 @@ udowodnić wierne odtworzenie sprzętu?).
 
 %build
 %{__make} \
-%ifarch arm ppc ppc64 s390 s390x sparc sparcv9 sparc64
+%ifarch %{arm} ppc ppc64 s390 s390x sparc sparcv9 sparc64
 	BIGENDIAN=1 \
 %endif
 %ifarch %{x8664} alpha ia64 ppc64 s390x sparc64
