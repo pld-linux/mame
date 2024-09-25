@@ -10,6 +10,7 @@ Group:		X11/Applications/Games
 #Source0Download: https://www.mamedev.org/release.html
 Source0:	https://github.com/mamedev/mame/archive/mame%{fver}/%{name}-%{version}.tar.gz
 # Source0-md5:	37b527a7b769b0d7d000ab512a5151ac
+Patch0:		%{name}-includes.patch
 URL:		https://www.mamedev.org/
 BuildRequires:	OpenGL-devel
 BuildRequires:	Qt5Core-devel >= 5
@@ -78,6 +79,7 @@ udowodnić wierne odtworzenie sprzętu?).
 
 %prep
 %setup -q -n %{name}-%{name}%{fver}
+%patch0 -p1
 
 %{__sed} -i -e 's/"lua"/"lua5.3"/' scripts/src/main.lua
 
