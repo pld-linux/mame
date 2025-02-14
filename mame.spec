@@ -79,7 +79,7 @@ udowodnić wierne odtworzenie sprzętu?).
 
 %prep
 %setup -q -n %{name}-%{name}%{fver}
-%patch0 -p1
+%patch -P0 -p1
 
 %{__sed} -i -e 's/"lua"/"lua5.3"/' scripts/src/main.lua
 
