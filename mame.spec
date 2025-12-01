@@ -127,8 +127,8 @@ Data files used by MAME.
 	CC="%{__cc}" \
 	CXX="%{__cxx}" \
 	LD="%{__cxx}" \
-#	OPT_FLAGS="%{rpmcflags}%{?with_system_lua: $(pkg-config --cflags lua5.4)}" \
-#	LDFLAGS="%{rpmldflags}%{?with_system_lua: $(pkg-config --libs lua5.4)}" \
+	OPT_FLAGS="%{rpmcflags}%{?with_system_lua: $(pkg-config --cflags lua5.4)}" \
+	LDFLAGS="%{rpmldflags}%{?with_system_lua: $(pkg-config --libs lua5.4)}" \
 	QT_HOME=%{_libdir}/qt6 \
 	NOWERROR=1 \
 	OSD=sdl \
