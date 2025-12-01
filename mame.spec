@@ -29,9 +29,9 @@ BuildRequires:	expat-devel >= 1.95
 BuildRequires:	flac-devel
 BuildRequires:	fontconfig-devel
 BuildRequires:	freetype-devel >= 2
-BuildRequires:	glm-devel
+BuildRequires:	GLM-devel
 BuildRequires:	libjpeg-devel
-BuildRequires:	lua53-devel >= 5.3
+%{?with_system_lua:BuildRequires:	lua54-devel >= 5.4.7}
 BuildRequires:	pkgconfig
 BuildRequires:	portaudio-devel
 BuildRequires:	portmidi-devel
