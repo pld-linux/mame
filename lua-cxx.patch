@@ -1,0 +1,11 @@
+--- mame-mame0283/3rdparty/lua/src/Makefile~	2025-11-27 17:32:18.000000000 +0100
++++ mame-mame0283/3rdparty/lua/src/Makefile	2025-11-30 20:26:32.966655887 +0100
+@@ -6,7 +6,7 @@
+ # Your platform. See PLATS for possible values.
+ PLAT= guess
+ 
+-CC= gcc -std=gnu99
++CC=$(CXX)
+ CFLAGS= -O2 -Wall -Wextra -DLUA_COMPAT_5_3 $(SYSCFLAGS) $(MYCFLAGS)
+ LDFLAGS= $(SYSLDFLAGS) $(MYLDFLAGS)
+ LIBS= -lm $(SYSLIBS) $(MYLIBS)
