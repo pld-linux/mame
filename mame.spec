@@ -9,7 +9,7 @@ Summary:	MAME - Multiple Arcade Machine Emulator
 Summary(pl.UTF-8):	MAME (Multiple Arcade Machine Emulator) - emulator wielu automatów do gier
 Name:		mame
 Version:	0.283
-Release:	0.1
+Release:	1
 License:	GPL v2+ (BSD for core part, LGPL v2.1+/GPL v2+ for some drivers)
 Group:		X11/Applications/Games
 #Source0Download: https://www.mamedev.org/release.html
@@ -127,8 +127,13 @@ Data files used by MAME.
 	CC="%{__cc}" \
 	CXX="%{__cxx}" \
 	LD="%{__cxx}" \
-	OPT_FLAGS="%{rpmcflags}%{?with_system_lua: $(pkg-config --cflags lua5.4)}" \
-	LDFLAGS="%{rpmldflags}%{?with_system_lua: $(pkg-config --libs lua5.4)}" \
+%if %{with system_lua}
+	OPT_FLAGS="%{rpmcflags} $(pkg-config --cflags lua5.4)" \
+	LDFLAGS="%{rpmldflags} $(pkg-config --libs lua5.4)" \
+%else
+	OPT_FLAGS="%{rpmcflags}" \
+	LDFLAGS="%{rpmldflags}" \
+%endif
 	QT_HOME=%{_libdir}/qt6 \
 	NOWERROR=1 \
 	OSD=sdl \
